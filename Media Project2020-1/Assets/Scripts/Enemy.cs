@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float speed = 0.1f;
 
-    public int hp { get; set; }
+    public int Hp { get; set; }
    // public float speed { get; set; }
 
     private float xPos;
@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     public Enemy()
     {
-        hp = 1;
+        Hp = 1;
         //speed = 0.1f;
     }
 
