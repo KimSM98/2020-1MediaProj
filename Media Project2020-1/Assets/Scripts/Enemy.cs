@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 0.1f;
+    //public float speed = 0.1f;
 
     public int Hp { get; set; }
    // public float speed { get; set; }
@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("이동");
         if (this.transform.position.x > -3.3f)
-            this.transform.Translate(0.1f*-speed*Time.timeScale, 0, 0);
+            this.transform.Translate(-0.1f*GameManager.Speed*Time.timeScale, 0, 0);
         else
             this.transform.position = new Vector2(xPos, yPos);
     }

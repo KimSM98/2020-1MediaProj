@@ -36,12 +36,13 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BackgroundScript.cs" />
      <Compile Include="Assets\Scripts\Color.cs" />
      <Compile Include="Assets\Scripts\ColorButton.cs" />
-     <Compile Include="Assets\Scripts\ColorController.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Monster.cs" />
+     <Compile Include="Assets\Scripts\MovingObject.cs" />
      <Compile Include="Assets\Scripts\UIManagerScript.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

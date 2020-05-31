@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject Monster;
-
-
+    public static float Speed = 0.1f; //Speed: 0(Pause)
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +18,6 @@ public class GameManager : MonoBehaviour
     {
         //if Game Over아니면
         Monster.GetComponent<Enemy>().Move();
+        
     }
 }
