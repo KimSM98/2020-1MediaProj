@@ -22,5 +22,8 @@ public class ColorButton : MonoBehaviour
         }
         AttackManagerScript.instance.ChangeMSBSprite();
     }
+    public void SetIsPushed(bool boolean){
+        isPushed = boolean;
+    }
     
 }

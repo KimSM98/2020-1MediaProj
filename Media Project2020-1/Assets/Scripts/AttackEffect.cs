@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class AttackEffect : MonoBehaviour
 {
-    public Sprite[] spr;
     public Sprite[] EffectSprites;
     Vector2 PreviousPos;
     public float Speed = 0.5f;
     public bool isMove = false;
     Rigidbody2D rigid;
     SpriteRenderer sprRenderer;
-    int sprNum;
     float speedTemp;
     Dictionary<int,int> ColorSpr;
     int colorNum;
@@ -20,7 +18,7 @@ public class AttackEffect : MonoBehaviour
         SetColorDictionary();
         PreviousPos = this.transform.position;
         sprRenderer = this.GetComponent<SpriteRenderer>();
-        sprNum=0;
+        
         rigid = GetComponent<Rigidbody2D>();
         this.gameObject.SetActive(false);
         speedTemp = Speed;
@@ -44,8 +42,6 @@ public class AttackEffect : MonoBehaviour
     public void Move(){
         if(this.transform.position.x > 2.25f){
             isMove = false;
-            sprNum = 0;
-            sprRenderer.sprite = spr[sprNum];
         } 
 
         this.transform.Translate(Speed*GameManager.Speed*Time.timeScale, 0,0);
@@ -54,13 +50,15 @@ public class AttackEffect : MonoBehaviour
     void BackToPos(){
         this.transform.position = PreviousPos;
         Speed = speedTemp;
+        
+        this.gameObject.SetActive(false);//0606
     }
 
     public void SetisMove(bool boolean){
         isMove = boolean;
     }
-    public void StartAnim(int num){
-        colorNum =num;
+    public void StartAnim(int SumOfColor){
+        colorNum =SumOfColor;
         StartCoroutine(Animation());
     }
     IEnumerator Animation(){
@@ -71,6 +69,9 @@ public class AttackEffect : MonoBehaviour
 
     }
     IEnumerator EndAnimation(){
+        
+        
+       // AttackManagerScript.instance.ResetData();//0606
         Speed = 0;
         for(int i = ColorSpr[colorNum]+7; i<ColorSpr[colorNum]+10; i++){
             sprRenderer.sprite = EffectSprites[i];
