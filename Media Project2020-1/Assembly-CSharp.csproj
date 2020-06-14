@@ -36,15 +36,21 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\AttackEffect.cs" />
-     <Compile Include="Assets\Scripts\AttackManagerScript.cs" />
-     <Compile Include="Assets\Scripts\BackgroundScript.cs" />
-     <Compile Include="Assets\Scripts\Color.cs" />
-     <Compile Include="Assets\Scripts\ColorButton.cs" />
-     <Compile Include="Assets\Scripts\Enemy.cs" />
+     <Compile Include="Assets\Scripts\CSVReader.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\Monster.cs" />
-     <Compile Include="Assets\Scripts\MovingObject.cs" />
+     <Compile Include="Assets\Scripts\GameScene\AttackEffect.cs" />
+     <Compile Include="Assets\Scripts\GameScene\AttackManagerScript.cs" />
+     <Compile Include="Assets\Scripts\GameScene\BackgroundScript.cs" />
+     <Compile Include="Assets\Scripts\GameScene\ColorButton.cs" />
+     <Compile Include="Assets\Scripts\GameScene\Enemy.cs" />
+     <Compile Include="Assets\Scripts\GameScene\EnemyManagerScript.cs" />
+     <Compile Include="Assets\Scripts\GameScene\MovingObject.cs" />
+     <Compile Include="Assets\Scripts\MainScene\CSVFileWriter.cs" />
+     <Compile Include="Assets\Scripts\MainScene\DifficultyStar.cs" />
+     <Compile Include="Assets\Scripts\MainScene\GameDataManager.cs" />
+     <Compile Include="Assets\Scripts\MainScene\Main_UIManager.cs" />
+     <Compile Include="Assets\Scripts\MainScene\Stage.cs" />
+     <Compile Include="Assets\Scripts\MainScene\StageManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
