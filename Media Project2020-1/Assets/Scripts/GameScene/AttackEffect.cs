@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackEffect : MonoBehaviour
 {
+
     public Sprite[] EffectSprites;
     Vector2 PreviousPos;
     public float Speed = 0.5f;
@@ -56,6 +57,7 @@ public class AttackEffect : MonoBehaviour
 
     public void SetisMove(bool boolean){
         isMove = boolean;
+        Player.instance.AnimAttack();
     }
     public void StartAnim(int SumOfColor){
         colorNum =SumOfColor;
@@ -68,8 +70,7 @@ public class AttackEffect : MonoBehaviour
         }        
 
     }
-    IEnumerator EndAnimation(){
-        
+    IEnumerator EndAnimation(){        
         
        // AttackManagerScript.instance.ResetData();//0606
         Speed = 0;
@@ -86,7 +87,9 @@ public class AttackEffect : MonoBehaviour
     {
         if(coll.CompareTag("Enemy")){
             StartCoroutine(EndAnimation());            
-            coll.GetComponent<Enemy>().Attacked();
+            if(colorNum == coll.GetComponent<Enemy>().GetColorNum()){
+                coll.GetComponent<Enemy>().Attacked();
+            }
         }
     }
 }

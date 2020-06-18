@@ -74,8 +74,10 @@ public class StageManager : MonoBehaviour
         int gameSceneNum = PlayerPrefs.GetInt("GameScene");
 
         if(gameSceneNum > 0){
-            PlayerPrefs.SetInt("RecentStage", pivotNum);
-            SceneManager.LoadScene("GameScene");
+            if(IsStageScreen == true){
+                PlayerPrefs.SetInt("RecentStage", pivotNum);
+                SceneManager.LoadScene("GameScene");
+            }
         }
     }
 }

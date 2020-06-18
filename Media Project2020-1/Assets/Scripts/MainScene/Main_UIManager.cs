@@ -31,9 +31,6 @@ public class Main_UIManager : MonoBehaviour
         StartCoroutine(ImageAnimation());
     }
     //게임 종료버튼
-    public void ExitGame(){
-        PlayerPrefs.SetInt("GameScene", 0);
-        Application.Quit();
-    }
+    
 
 }

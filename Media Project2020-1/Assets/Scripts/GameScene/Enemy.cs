@@ -7,10 +7,13 @@ public class Enemy : MonoBehaviour
     public float speed = -0.1f;
 
     public int Hp { get; set; }
-   // public float speed { get; set; }
-
+    public int ColorNum;
     private Vector2 firstPos;
     
+    void Start()
+    {
+        firstPos = this.transform.position;
+    }
     public Enemy()
     {
         Hp = 1;
@@ -23,30 +26,40 @@ public class Enemy : MonoBehaviour
         if(Hp == 0){
             GetComponent<Animator>().SetTrigger("Dead");
         }
-        //GetComponent<Animator>().
     }
 
     public void Move()
     {
-        Debug.Log("이동");
         if (this.transform.position.x > -3.3f)
             this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);
-        else
-            this.transform.position = firstPos;
+        else{
+            ResetObj();
+        }
+            
     }
 
     public void ResetObj(){        
         Hp=1;
         gameObject.SetActive(false);
         transform.position = firstPos;
+        //0616
+        EnemyManagerScript.instance.SpawnEnemy();//스폰은 애니메이션 끝나고
         gameObject.SetActive(true);
-
+        
 
     }
 
-    void Start()
+    public int GetColorNum(){
+        return ColorNum;
+    }
+    public void SetColorNum(int num){
+        ColorNum = num;
+    }
+    /*void OnTriggerEnter2D(Collider2D coll)
     {
-        firstPos = this.transform.position;
+        if(coll.CompareTag("Player")){
+            Debug.Log("플레이어랑 부딪힘");
+        }
     }
-    
+    */
 }

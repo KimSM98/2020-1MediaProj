@@ -11,16 +11,19 @@ public class ColorButton : MonoBehaviour
 
     public void GetButtonColor()
     {
-        if(AttackManagerScript.instance.PushedButtonNum <2 && isPushed != true){//최대 2개 누를 수 있고, 선택된 것은 작동 x
+        if(Time.timeScale != 0){
+            if(AttackManagerScript.instance.PushedButtonNum <2 && isPushed != true){//최대 2개 누를 수 있고, 선택된 것은 작동 x
             isPushed = true;
             AttackManagerScript.instance.PushColorButton(ButtonColorNum, ArrayNum);
             
-        }//다시 누르면 뗌
-        else if(AttackManagerScript.instance.PushedButtonNum>0 && isPushed == true){
-            isPushed = false;
-            AttackManagerScript.instance.releaseColorButton(ButtonColorNum,ArrayNum);
+            }//다시 누르면 뗌
+            else if(AttackManagerScript.instance.PushedButtonNum>0 && isPushed == true){
+                isPushed = false;
+                AttackManagerScript.instance.releaseColorButton(ButtonColorNum,ArrayNum);
+            }
+            AttackManagerScript.instance.ChangeMSBSprite();
         }
-        AttackManagerScript.instance.ChangeMSBSprite();
+        
     }
     public void SetIsPushed(bool boolean){
         isPushed = boolean;
