@@ -26,9 +26,11 @@ public class GameUIButton : MonoBehaviour
         Application.Quit();
     }
     public void PowerButton(){
+        Time.timeScale = 0;
         QuitGroup.SetActive(true);
     }
     public void QuitButtonNo(){
+        Time.timeScale = 1;
         QuitGroup.SetActive(false);
     }
 

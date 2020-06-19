@@ -10,17 +10,18 @@ public class Enemy : MonoBehaviour
     public int ColorNum;
     private Vector2 firstPos;
     
+    public Enemy()
+    {
+        Hp = 1;
+        
+        //speed = 0.1f;
+    }
     void Start()
     {
         firstPos = this.transform.position;
     }
-    public Enemy()
-    {
-        Hp = 1;
-        //speed = 0.1f;
-    }
 
-    public void Attacked()
+    virtual public void Attacked()
     {
         Hp -= 1;
         if(Hp == 0){
@@ -28,7 +29,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Move()
+    public virtual void Move()
     {
         if (this.transform.position.x > -3.3f)
             this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);

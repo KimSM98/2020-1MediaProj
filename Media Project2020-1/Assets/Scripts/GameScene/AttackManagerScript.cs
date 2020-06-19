@@ -17,6 +17,10 @@ public class AttackManagerScript : MonoBehaviour
 
     private Sprite[] OriginCBSprites = new Sprite[5];
     int[] ClickedNum;
+
+    public Button[] StarButton;
+    public GameObject BossAttackedObj;
+    int starNum;
     void Awake()
     {
         instance = this;
@@ -24,11 +28,14 @@ public class AttackManagerScript : MonoBehaviour
   
    void Start()
    {
+       BossAttackedObj.SetActive(false);
        if(SumOfColor == 0) MiddleStarButton.gameObject.SetActive(false);
        for(int i=0; i<ColorButtons.Length; i++){
            OriginCBSprites[i] = ColorButtons[i].image.sprite; //공격하면 원래대로 돌리기
        }
        ClickedNum = new int[2];//0606
+       starNum = 0;//0619
+       OffStarButton();//0619
    }
    public void Attack(){
         
@@ -69,11 +76,34 @@ public class AttackManagerScript : MonoBehaviour
         SumOfColor = 0;        
         
         PushedButtonNum = 0;//0606
-        /*PushedButtonNum = 0;//0606
-        for(int i=0; i<2; i++){
-            ColorButtons[ClickedNum[i]].image.sprite = OriginCBSprites[ClickedNum[i]];
-            //ClickedColorButtonSprites[ClickedNum[i]].gameObject.SetActive(false);
-        }*/
+        
+    }
+
+    private void OffStarButton(){
+        for(int i=0; i<StarButton.Length; i++){
+            StarButton[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void StarButtonFunc(){
+        //BossAttackedObj.GetComponent<Animator>().SetTrigger("Attacked");
+        BossAttackedObj.SetActive(true);
+        BossAttackedObj.GetComponent<Animator>().SetBool("IsAttacked", true);
+        Boss.instance.Attacked();
+    }
+
+    public void ActiveStarButton(){
+        if(starNum<5)
+            StarButton[starNum].gameObject.SetActive(true);
+        starNum++;
+    }
+
+    public void DecreaseStarNum(bool isBossDead){
+        starNum--;
+        if(starNum<=0 && isBossDead == false){
+            GameManager.instance.GameOver();
+            Debug.Log("게임오버");
+        }
     }
 
     

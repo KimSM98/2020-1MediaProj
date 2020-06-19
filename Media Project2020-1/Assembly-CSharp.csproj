@@ -60,11 +60,14 @@
      <Compile Include="Assets\Scripts\GameScene\AttackEffect.cs" />
      <Compile Include="Assets\Scripts\GameScene\AttackManagerScript.cs" />
      <Compile Include="Assets\Scripts\GameScene\BackgroundScript.cs" />
+     <Compile Include="Assets\Scripts\GameScene\Boss.cs" />
+     <Compile Include="Assets\Scripts\GameScene\BossAttacked.cs" />
      <Compile Include="Assets\Scripts\GameScene\ColorButton.cs" />
      <Compile Include="Assets\Scripts\GameScene\Enemy.cs" />
      <Compile Include="Assets\Scripts\GameScene\EnemyManagerScript.cs" />
      <Compile Include="Assets\Scripts\GameScene\MovingObject.cs" />
      <Compile Include="Assets\Scripts\GameScene\Player.cs" />
+     <Compile Include="Assets\Scripts\GameScene\StarButton.cs" />
      <Compile Include="Assets\Scripts\GameUIButton.cs" />
      <Compile Include="Assets\Scripts\MainScene\CSVFileWriter.cs" />
      <Compile Include="Assets\Scripts\MainScene\DifficultyStar.cs" />

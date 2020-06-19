@@ -89,6 +89,7 @@ public class AttackEffect : MonoBehaviour
             StartCoroutine(EndAnimation());            
             if(colorNum == coll.GetComponent<Enemy>().GetColorNum()){
                 coll.GetComponent<Enemy>().Attacked();
+                GameManager.instance.IncreaseKilledNum();
             }
         }
     }

@@ -24,6 +24,10 @@ public class Player : MonoBehaviour
     {
         if(coll.CompareTag("Enemy")){
             Attacked();
+            GameManager.instance.DecreaseMonsterNum();
+        }
+        else if(coll.CompareTag("Boss")){
+            GameManager.instance.GameOver();
         }
     }
     private void Attacked(){

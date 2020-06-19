@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; 
     public GameObject Monster;
+    public GameObject Boss;
     public static float Speed = 0.1f; //Speed: 0(Pause)
     public GameObject GameOverGroup;
+    public Text Text_KillMonsterNum;
+    public Text Text_KilledMonsterNum;
+    public Image GameClearImg;
+
+    int killedMonsterNum;
     int[] SpawnEnemyArr;
     int enemyNum;
     int bossHP;
-
+    bool isBossMove;
+    bool isMonsterMove;
+    int multiple5;
     void Awake()
     {
         instance = this;
@@ -20,14 +29,22 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        GameClearImg.gameObject.SetActive(false);//0619
+        isMonsterMove = true;
+        isBossMove = false;
+        Boss.SetActive(false);
+        killedMonsterNum=0;
+        Text_KilledMonsterNum.text = "" + killedMonsterNum;
+        multiple5 = 5; //0619
     }
 
-    // Update is called once per frame
     void Update()
     {
         //if Game Over아니면
-        Monster.GetComponent<Enemy>().Move();
+        if(isMonsterMove == true) Monster.GetComponent<Enemy>().Move();
+            
+        //if(isBossMove == true) Boss.GetComponent<Boss>().Move();
+        //Boss.GetComponent<Boss>().Move();
         
     }
     private void AssignStageInfo(){//0618
@@ -49,6 +66,8 @@ public class GameManager : MonoBehaviour
 
         int[] EnemyNumArr = {15, 15, 15, 15, 25, 25, 25, 30, 30, 30, 50};
         enemyNum = EnemyNumArr[stageNum-1];
+        Text_KillMonsterNum.text = "/" + enemyNum;
+        
         int[] BossHpArr = {2, 3, 4, 3, 4, 4, 5, 5, 5, 5, 5};
         bossHP = BossHpArr[stageNum-1];       
 
@@ -56,10 +75,31 @@ public class GameManager : MonoBehaviour
     public int[] GetSpawnEnemyArr(){
         return SpawnEnemyArr;
     }
-    public void DecreaseEnemyNum(){
+    public void DecreaseMonsterNum(){
         enemyNum--;
         if(enemyNum<1){
-            
+            isMonsterMove = false;
+            Monster.SetActive(false);
+            Boss.SetActive(true);
+            isBossMove = true;
+        }
+    }
+    public void IncreaseKilledNum(){
+        DecreaseMonsterNum();
+        killedMonsterNum++;
+
+        /*if(killedMonsterNum == enemyNum){
+            Debug.Log("같아요");
+            isMonsterMove = false;
+            Monster.SetActive(false);
+            Boss.SetActive(true);
+            isBossMove = true;
+        }*/
+        Text_KilledMonsterNum.text = "" + killedMonsterNum;
+        //5배수가 되면 별 켜져야함
+        if(killedMonsterNum/multiple5 == 1){
+            AttackManagerScript.instance.ActiveStarButton();
+            multiple5+=5;
         }
     }
     public int GetBossHP(){
@@ -67,5 +107,14 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver(){
         GameOverGroup.SetActive(true);
+        isBossMove = false;
+    }
+    public int GetStarNum(){
+        int starNum;
+        starNum = killedMonsterNum/5;
+        return starNum;
+    }
+    public void GameClear(){
+        GameClearImg.gameObject.SetActive(true);
     }
 }
