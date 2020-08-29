@@ -102,7 +102,7 @@ public class AttackManagerScript : MonoBehaviour
         starNum--;
         if(starNum<=0 && isBossDead == false){
             GameManager.instance.GameOver();
-            Debug.Log("게임오버");
+            Player.instance.GetComponent<Animator>().SetTrigger("Dead");
         }
     }
 

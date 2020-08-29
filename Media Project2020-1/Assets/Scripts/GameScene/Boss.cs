@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Boss : Enemy
 {
     public static Boss instance;
@@ -26,12 +27,9 @@ public class Boss : Enemy
     }
     
     public override void Move(){
-        /*if (this.transform.position.x > -3.3f){
-            Debug.Log("보스 움직임 GameManagerSpee: " + GameManager.Speed + " time: "+ Time.timeScale);
-            this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);
-            
-        }*/
-        this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);
+        if (this.transform.position.x > -3.3f){
+            this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);            
+        }
     }
     public override void Attacked()
     {

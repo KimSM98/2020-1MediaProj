@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     bool isBossMove;
     bool isMonsterMove;
     int multiple5;
+    
     void Awake()
     {
         instance = this;
@@ -43,8 +44,10 @@ public class GameManager : MonoBehaviour
         //if Game Over아니면
         if(isMonsterMove == true) Monster.GetComponent<Enemy>().Move();
             
-        //if(isBossMove == true) Boss.GetComponent<Boss>().Move();
-        //Boss.GetComponent<Boss>().Move();
+        if(isBossMove == true){
+            if(Boss.GetComponent<Transform>().position.x<-3f) isBossMove = false;
+            Boss.GetComponent<Boss>().Move();
+        } 
         
     }
     private void AssignStageInfo(){//0618
@@ -77,7 +80,7 @@ public class GameManager : MonoBehaviour
     }
     public void DecreaseMonsterNum(){
         enemyNum--;
-        if(enemyNum<1){
+        if(enemyNum<1){//Boss Appear
             isMonsterMove = false;
             Monster.SetActive(false);
             Boss.SetActive(true);
@@ -88,13 +91,6 @@ public class GameManager : MonoBehaviour
         DecreaseMonsterNum();
         killedMonsterNum++;
 
-        /*if(killedMonsterNum == enemyNum){
-            Debug.Log("같아요");
-            isMonsterMove = false;
-            Monster.SetActive(false);
-            Boss.SetActive(true);
-            isBossMove = true;
-        }*/
         Text_KilledMonsterNum.text = "" + killedMonsterNum;
         //5배수가 되면 별 켜져야함
         if(killedMonsterNum/multiple5 == 1){
@@ -107,7 +103,7 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver(){
         GameOverGroup.SetActive(true);
-        isBossMove = false;
+        Player.instance.OffPlayerHpUI();
     }
     public int GetStarNum(){
         int starNum;
@@ -117,4 +113,11 @@ public class GameManager : MonoBehaviour
     public void GameClear(){
         GameClearImg.gameObject.SetActive(true);
     }
+
+    //치트
+    public void Cheet(){
+        enemyNum=0;
+        DecreaseMonsterNum();
+    }
+    
 }

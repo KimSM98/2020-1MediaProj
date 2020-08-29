@@ -45,8 +45,7 @@ public class Enemy : MonoBehaviour
         transform.position = firstPos;
         //0616
         EnemyManagerScript.instance.SpawnEnemy();//스폰은 애니메이션 끝나고
-        gameObject.SetActive(true);
-        
+        gameObject.SetActive(true);       
 
     }
 

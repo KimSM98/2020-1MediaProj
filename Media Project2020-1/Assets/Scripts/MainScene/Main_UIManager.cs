@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Main_UIManager : MonoBehaviour
 {
     public GameObject[] Scene;
-    public Image ImagePAB;
+    public Image ImagePAB;//press any button
     private int sceneNum;
     void Start()
     {
@@ -15,7 +15,7 @@ public class Main_UIManager : MonoBehaviour
 
     public void PressAnyButton(){
         if(sceneNum < 1){
-            PlayerPrefs.SetInt("GameScene", 1);
+            PlayerPrefs.SetInt("MainScene", 1);
             Scene[0].SetActive(false);
             Scene[1].SetActive(true);
             sceneNum++;
@@ -24,11 +24,12 @@ public class Main_UIManager : MonoBehaviour
     }
 
     IEnumerator ImageAnimation(){//텍스트 깜빡이기
-        ImagePAB.color = new Vector4(1f,1f,1f,0f);
+        
         yield return new WaitForSeconds(0.5f);
-        ImagePAB.color = new Vector4(1f,1f,1f,1f);
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(ImageAnimation());
+        if(ImagePAB.color.a > 0) ImagePAB.color = new Vector4(1f,1f,1f,0f);
+        else ImagePAB.color = new Vector4(1f,1f,1f,1f);
+        if(sceneNum==0)
+            StartCoroutine(ImageAnimation());
     }
     //게임 종료버튼
     

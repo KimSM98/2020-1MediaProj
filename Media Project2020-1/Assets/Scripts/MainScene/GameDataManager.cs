@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameDataManager : MonoBehaviour
 {
     bool isSave;
-
     void Awake()
     {
         isSave = PlayerPrefs.HasKey("RecentStage");
@@ -14,8 +13,13 @@ public class GameDataManager : MonoBehaviour
                 PlayerPrefs.SetInt(i.ToString(), 0);
             }
             PlayerPrefs.SetInt("RecentStage", 1);
-        }       
+        }   
+        Time.timeScale = 1;    
+    }    
+    void Start()
+    {
+        Debug.Log("저장");
+        StageController.instance.SaveStageDataToJson();
     }
 
-    
 }

@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
         }
         else if(coll.CompareTag("Boss")){
             GameManager.instance.GameOver();
+            GetComponent<Animator>().SetTrigger("IsDead");
         }
     }
     private void Attacked(){
@@ -39,7 +40,6 @@ public class Player : MonoBehaviour
         if(Hp<1){
             GetComponent<Animator>().SetTrigger("IsDead");
             GameManager.instance.GameOver();
-            //게임 오버
         }
         //게임 오버
     }
@@ -48,5 +48,10 @@ public class Player : MonoBehaviour
     }
     public void AnimAttack(){
         GetComponent<Animator>().SetTrigger("Attack");
+    }
+    public void OffPlayerHpUI(){
+        foreach(Image img in ImageHeart){
+            img.gameObject.SetActive(false);
+        }
     }
 }
