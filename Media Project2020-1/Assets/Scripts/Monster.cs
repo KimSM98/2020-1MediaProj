@@ -33,7 +33,7 @@ public class Monster : MonoBehaviour
         }
 
         while(isMove){
-            this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);
+            this.transform.Translate(speed*GameManager.instance.Speed*Time.timeScale, 0, 0);
         }
     }
 

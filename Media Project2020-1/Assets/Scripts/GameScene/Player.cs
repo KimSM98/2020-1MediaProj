@@ -21,17 +21,14 @@ public class Player : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D coll)
-    {
-        if(coll.CompareTag("Enemy")){
-            Attacked();
-            GameManager.instance.DecreaseMonsterNum();
-        }
-        else if(coll.CompareTag("Boss")){
+    {        
+        /*0910
+        if(coll.CompareTag("Boss")){
             GameManager.instance.GameOver();
             GetComponent<Animator>().SetTrigger("IsDead");
-        }
+        }*/
     }
-    private void Attacked(){
+    public void Attacked(){
         if(Hp>0){
             Hp--;
             ImageHeart[Hp].gameObject.SetActive(false);
@@ -48,6 +45,10 @@ public class Player : MonoBehaviour
     }
     public void AnimAttack(){
         GetComponent<Animator>().SetTrigger("Attack");
+    }
+
+    public void AnimDead(){
+        GetComponent<Animator>().SetTrigger("IsDead");
     }
     public void OffPlayerHpUI(){
         foreach(Image img in ImageHeart){

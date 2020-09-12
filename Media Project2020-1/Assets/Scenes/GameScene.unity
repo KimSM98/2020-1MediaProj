@@ -589,12 +589,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a049efccde2841f4cb084a9976bf2ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 0.05
   Monster: {fileID: 34471895}
   Boss: {fileID: 1391978040}
   GameOverGroup: {fileID: 1374236252}
   Text_KillMonsterNum: {fileID: 1396383061}
   Text_KilledMonsterNum: {fileID: 1500619555}
   GameClearImg: {fileID: 1755674025}
+  isBossMove: 0
 --- !u!4 &249067746
 Transform:
   m_ObjectHideFlags: 0

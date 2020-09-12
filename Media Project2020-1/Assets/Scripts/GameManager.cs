@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; 
+    public float Speed = 0.1f; //Speed: 0(Pause)
     public GameObject Monster;
     public GameObject Boss;
-    public static float Speed = 0.1f; //Speed: 0(Pause)
     public GameObject GameOverGroup;
     public Text Text_KillMonsterNum;
     public Text Text_KilledMonsterNum;
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     int[] SpawnEnemyArr;
     int enemyNum;
     int bossHP;
-    bool isBossMove;
+    public bool isBossMove;
     bool isMonsterMove;
     int multiple5;
     
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     }
     private void AssignStageInfo(){//0618
         int stageNum = PlayerPrefs.GetInt("RecentStage");
+        Debug.Log("Stage: " + stageNum);
         //스테이지 넘버에 따라 넣게 이 부분도 수정할것
         int[] Stage1 = {1, 2, 4, 8, 15};//1,2,3
         int[] Stage4 = {1,2,3,4,5,6,8,9,10,12,15,16,17,19,23};//4,5
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
         int[] Stage9 = {2,17,6,3,10};//9
         int[] Stage10 = {17,19,15,16,23};//10
 
+        stageNum++;//겉모습은 1이지만 안에서는 0으로 넘버링
         if(stageNum == 1 || stageNum == 2 || stageNum == 3) SpawnEnemyArr = Stage1;
         else if(stageNum == 4 || stageNum == 5) SpawnEnemyArr = Stage4;
         else if(stageNum == 6 || stageNum == 7 || stageNum == 11) SpawnEnemyArr = Stage6;
@@ -68,11 +70,11 @@ public class GameManager : MonoBehaviour
         else if(stageNum == 10) SpawnEnemyArr = Stage10;
 
         int[] EnemyNumArr = {15, 15, 15, 15, 25, 25, 25, 30, 30, 30, 50};
-        enemyNum = EnemyNumArr[stageNum-1];
+        enemyNum = EnemyNumArr[stageNum];
         Text_KillMonsterNum.text = "/" + enemyNum;
         
         int[] BossHpArr = {2, 3, 4, 3, 4, 4, 5, 5, 5, 5, 5};
-        bossHP = BossHpArr[stageNum-1];       
+        bossHP = BossHpArr[stageNum];       
 
     }
     public int[] GetSpawnEnemyArr(){
@@ -81,11 +83,18 @@ public class GameManager : MonoBehaviour
     public void DecreaseMonsterNum(){
         enemyNum--;
         if(enemyNum<1){//Boss Appear
+            //AttackManagerScript.instance.ActiveStarButton();
             isMonsterMove = false;
             Monster.SetActive(false);
             Boss.SetActive(true);
             isBossMove = true;
         }
+    }
+    private void BossAppear(){
+        isMonsterMove = false;
+        Monster.SetActive(false);
+        Boss.SetActive(true);
+        isBossMove = true;
     }
     public void IncreaseKilledNum(){
         DecreaseMonsterNum();

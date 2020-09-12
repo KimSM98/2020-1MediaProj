@@ -20,6 +20,7 @@ public class AttackManagerScript : MonoBehaviour
 
     public Button[] StarButton;
     public GameObject BossAttackedObj;
+
     int starNum;
     void Awake()
     {
@@ -93,8 +94,11 @@ public class AttackManagerScript : MonoBehaviour
     }
 
     public void ActiveStarButton(){
-        if(starNum<5)
+        if(starNum<4)
             StarButton[starNum].gameObject.SetActive(true);
+        if(GameManager.instance.isBossMove == true && starNum == 4){
+            StarButton[starNum].gameObject.SetActive(true);
+        }
         starNum++;
     }
 

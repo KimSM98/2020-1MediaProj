@@ -39,9 +39,9 @@ public class BackgroundScript : MonoBehaviour
         if(MovingObj.CurrentNum > obj.Length-1) MovingObj.CurrentNum = 0;
 
         
-        obj[MovingObj.CurrentNum].transform.Translate(moveSpeed*GameManager.Speed*Time.timeScale, 0, 0);
+        obj[MovingObj.CurrentNum].transform.Translate(moveSpeed*GameManager.instance.Speed*Time.timeScale, 0, 0);
 
-        if(MovingObj.PreviousNum != MovingObj.CurrentNum) obj[MovingObj.PreviousNum].transform.Translate(moveSpeed*GameManager.Speed*Time.timeScale, 0, 0);
+        if(MovingObj.PreviousNum != MovingObj.CurrentNum) obj[MovingObj.PreviousNum].transform.Translate(moveSpeed*GameManager.instance.Speed*Time.timeScale, 0, 0);
 
     }
     
