@@ -16,10 +16,5 @@ public class GameDataManager : MonoBehaviour
         }   
         Time.timeScale = 1;    
     }    
-    void Start()
-    {
-        Debug.Log("저장");
-        StageController.instance.SaveStageDataToJson();
-    }
 
 }

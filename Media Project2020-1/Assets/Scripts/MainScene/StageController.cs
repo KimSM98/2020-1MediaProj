@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -11,6 +11,7 @@ public class StageController : MonoBehaviour
     void Awake()
     {
         instance = this;
+        LoadStageDataFromJson();
     }
     
     [ContextMenu("To Json Data")]
@@ -40,12 +41,7 @@ public class StageController : MonoBehaviour
 [System.Serializable]
 public class StageData
 {
-    public static StageData instance;
     public int[] StageScores;
-    void Awake()
-    {
-        instance = this;
-    }
     public void Save(int stageNum, int score){
         StageScores[stageNum] = score;
     }

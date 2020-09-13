@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     int bossHP;
     bool isBossMove;
     bool isMonsterMove;
-    int multiple5;
+    int multiple5;//5배수
     
     void Awake()
     {
@@ -60,21 +60,22 @@ public class GameManager : MonoBehaviour
         int[] Stage9 = {2,17,6,3,10};//9
         int[] Stage10 = {17,19,15,16,23};//10
 
-        if(stageNum == 1 || stageNum == 2 || stageNum == 3) SpawnEnemyArr = Stage1;
-        else if(stageNum == 4 || stageNum == 5) SpawnEnemyArr = Stage4;
-        else if(stageNum == 6 || stageNum == 7 || stageNum == 11) SpawnEnemyArr = Stage6;
-        else if(stageNum == 8) SpawnEnemyArr = Stage8;
-        else if(stageNum == 9) SpawnEnemyArr = Stage9;
-        else if(stageNum == 10) SpawnEnemyArr = Stage10;
+        if(stageNum == 0 || stageNum == 1 || stageNum == 2) SpawnEnemyArr = Stage1;
+        else if(stageNum == 3 || stageNum == 4) SpawnEnemyArr = Stage4;
+        else if(stageNum == 5 || stageNum == 6 || stageNum == 10) SpawnEnemyArr = Stage6;
+        else if(stageNum == 7) SpawnEnemyArr = Stage8;
+        else if(stageNum == 8) SpawnEnemyArr = Stage9;
+        else if(stageNum == 9) SpawnEnemyArr = Stage10;
 
         int[] EnemyNumArr = {15, 15, 15, 15, 25, 25, 25, 30, 30, 30, 50};
-        enemyNum = EnemyNumArr[stageNum-1];
+        enemyNum = EnemyNumArr[stageNum];
         Text_KillMonsterNum.text = "/" + enemyNum;
         
         int[] BossHpArr = {2, 3, 4, 3, 4, 4, 5, 5, 5, 5, 5};
-        bossHP = BossHpArr[stageNum-1];       
+        bossHP = BossHpArr[stageNum];       
 
     }
+    
     public int[] GetSpawnEnemyArr(){
         return SpawnEnemyArr;
     }

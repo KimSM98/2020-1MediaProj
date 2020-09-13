@@ -24,9 +24,8 @@ public class StageManager : MonoBehaviour
     }
     
     void SetStage(){
-        SetScoreStar();
-
         temp_PivotNum = pivotNum;    
+        SetScoreStar();
 
         if(pivotNum==0){
             StageButton[0].gameObject.SetActive(false);
@@ -49,30 +48,6 @@ public class StageManager : MonoBehaviour
         }
         
     }
-
-    /*void SetStage(){
-        temp_PivotNum = pivotNum-1;
-        SetDifficultyStar();
-        for(int i=0; i<3; i++){       
-            StageButton[i].GetComponent<Stage>().SetStageNum(temp_PivotNum);
-            temp_PivotNum++; 
-        }
-
-        if(pivotNum <= 1){//stage1
-            StageButton[0].gameObject.SetActive(false);
-            DirectionPivot[0].gameObject.SetActive(false);
-        }
-        else if(pivotNum > 9){
-            StageButton[2].gameObject.SetActive(false);            
-            DirectionPivot[1].gameObject.SetActive(false);
-        }
-        else{
-            StageButton[0].gameObject.SetActive(true);
-            StageButton[2].gameObject.SetActive(true);
-            DirectionPivot[0].gameObject.SetActive(true);
-            DirectionPivot[1].gameObject.SetActive(true);
-        }
-    }*/
     void SetScoreStar(){
         int stageScore = StageController.instance.GetStageScore(pivotNum);
         
@@ -81,27 +56,6 @@ public class StageManager : MonoBehaviour
                 Star[i].GetComponent<DifficultyStar>().OnStar();//별 끄기
             else
                 Star[i].GetComponent<DifficultyStar>().OffStar();
-        }
-    }
-    void SetDifficultyStar(){//Score로 이름 변경 예정
-        for(int i=0; i<3; i++){            
-            Star[i].GetComponent<DifficultyStar>().OffStar();
-        }
-        int num = PlayerPrefs.GetInt("RecentStage");
-        //int stageScore = StageData.instance.GetStageScore(num);
-
-        /*if(stageScore>0){
-            for(int i=0; i<stageScore; i++){
-                Star[i].GetComponent<DifficultyStar>().OnStar();
-            }
-        }
-        else{
-            for(int i=0; i<PlayerPrefs.GetInt(num.ToString()); i++){
-                Star[i].GetComponent<DifficultyStar>().OnStar();
-            }
-        }*/
-        for(int i=0; i<PlayerPrefs.GetInt(num.ToString()); i++){
-            Star[i].GetComponent<DifficultyStar>().OnStar();
         }
     }
 
