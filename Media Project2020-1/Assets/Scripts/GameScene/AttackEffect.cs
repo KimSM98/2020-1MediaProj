@@ -45,7 +45,7 @@ public class AttackEffect : MonoBehaviour
             isMove = false;
         } 
 
-        this.transform.Translate(Speed*GameManager.instance.Speed*Time.timeScale, 0,0);
+        this.transform.Translate(Speed*GameManager.Speed*Time.timeScale, 0,0);
 
     }
     void BackToPos(){

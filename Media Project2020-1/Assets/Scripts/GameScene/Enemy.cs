@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     public virtual void Move()
     {
         if (this.transform.position.x > -3.3f)
-            this.transform.Translate(speed*GameManager.instance.Speed*Time.timeScale, 0, 0);
+            this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);
         else{
             ResetObj();
         }
@@ -55,14 +55,11 @@ public class Enemy : MonoBehaviour
     public void SetColorNum(int num){
         ColorNum = num;
     }
-    void OnTriggerEnter2D(Collider2D coll)
+    /*void OnTriggerEnter2D(Collider2D coll)
     {
-        if(CompareTag("Enemy") && coll.CompareTag("Player")){
-            if(Hp > 0){
-                coll.GetComponent<Player>().Attacked();
-                GameManager.instance.DecreaseMonsterNum();
-            }
+        if(coll.CompareTag("Player")){
+            Debug.Log("플레이어랑 부딪힘");
         }
     }
-    
+    */
 }
