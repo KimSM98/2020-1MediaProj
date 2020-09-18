@@ -8,11 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance; 
     public GameObject Monster;
     public GameObject Boss;
-    public static float Speed = 0.1f; //Speed: 0(Pause)
-    public GameObject GameOverGroup;
+    public float Speed = 0.1f; //Speed: 0(Pause)
     public Text Text_KillMonsterNum;
     public Text Text_KilledMonsterNum;
-    public Image GameClearImg;
+    public GameObject GameEndingObj;
 
     int killedMonsterNum;
     int[] SpawnEnemyArr;
@@ -21,16 +20,18 @@ public class GameManager : MonoBehaviour
     bool isBossMove;
     bool isMonsterMove;
     int multiple5;//5배수
-    
+    public bool isGameOver = false;
+    int stageNum;
+
     void Awake()
     {
+        stageNum = PlayerPrefs.GetInt("RecentStage");
         instance = this;
         AssignStageInfo();
         Debug.Log("스테이지"+PlayerPrefs.GetInt("RecentStage"));
     }
     void Start()
     {
-        GameClearImg.gameObject.SetActive(false);//0619
         isMonsterMove = true;
         isBossMove = false;
         Boss.SetActive(false);
@@ -45,13 +46,12 @@ public class GameManager : MonoBehaviour
         if(isMonsterMove == true) Monster.GetComponent<Enemy>().Move();
             
         if(isBossMove == true){
-            if(Boss.GetComponent<Transform>().position.x<-3f) isBossMove = false;
+            if(Boss.GetComponent<Transform>().position.x<-3.5f) isBossMove = false;
             Boss.GetComponent<Boss>().Move();
         } 
         
     }
     private void AssignStageInfo(){//0618
-        int stageNum = PlayerPrefs.GetInt("RecentStage");
         //스테이지 넘버에 따라 넣게 이 부분도 수정할것
         int[] Stage1 = {1, 2, 4, 8, 15};//1,2,3
         int[] Stage4 = {1,2,3,4,5,6,8,9,10,12,15,16,17,19,23};//4,5
@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
             Monster.SetActive(false);
             Boss.SetActive(true);
             isBossMove = true;
+            AttackManagerScript.instance.ActiveNumStar5();   
         }
     }
     public void IncreaseKilledNum(){
@@ -103,17 +104,38 @@ public class GameManager : MonoBehaviour
         return bossHP;
     }
     public void GameOver(){
-        GameOverGroup.SetActive(true);
+        isGameOver = true;
+        
         Player.instance.OffPlayerHpUI();
+        ShowScore();
+    }
+    public void GameClear(){
+        ShowScore();
+    }
+
+    void ShowScore(){
+        int score = 3; //Highest Score
+        
+        int minusScore = Boss.GetComponent<Boss>().GetBossHp();
+        if(stageNum == 0) minusScore++;
+        //스코어 계산
+        for(int i=0; i<minusScore; i++){
+            score--;
+            if(score == 0) break;
+        }
+        if(stageNum == 0 && score == 2) score = 3;
+        //stage 0 이 보스hp가 2이기 때문에 예외처리 필요 
+        Debug.Log("Game Score: " + score);
+        //Save Score
+        PlayerPrefs.SetInt("CurrentScore", score);
+        GameEndingObj.GetComponent<GameEnding>().OnGameEndingUI(score);
     }
     public int GetStarNum(){
         int starNum;
         starNum = killedMonsterNum/5;
         return starNum;
     }
-    public void GameClear(){
-        GameClearImg.gameObject.SetActive(true);
-    }
+    
 
     //치트
     public void Cheet(){

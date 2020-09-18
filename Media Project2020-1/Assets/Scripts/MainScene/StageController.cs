@@ -33,8 +33,10 @@ public class StageController : MonoBehaviour
         return stageData.GetScore(stageNum);
     }
     public void SaveStageScore(int stageNum, int score){
-        stageData.Save(stageNum, score);
-        SaveStageDataToJson();
+        if(score > stageData.GetScore(stageNum)){
+            stageData.Save(stageNum, score);
+            SaveStageDataToJson();
+        }
     }
    
 }

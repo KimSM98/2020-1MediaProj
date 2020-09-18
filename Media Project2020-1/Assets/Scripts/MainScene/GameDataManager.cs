@@ -14,7 +14,14 @@ public class GameDataManager : MonoBehaviour
             }
             PlayerPrefs.SetInt("RecentStage", 1);
         }   
+        
         Time.timeScale = 1;    
+        //게임플레이 스코어 불러오기
+        if(PlayerPrefs.HasKey("CurrentScore")){
+            int stageNum = PlayerPrefs.GetInt("RecentStage");
+            int score = PlayerPrefs.GetInt("CurrentScore");
+            StageController.instance.SaveStageScore(stageNum, score);
+        }
     }    
 
 }

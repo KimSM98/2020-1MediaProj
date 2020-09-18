@@ -12,14 +12,15 @@ public class GameUIButton : MonoBehaviour
     public Button PauseButton;
     public Sprite[] PauseSpr;
     private int soundvalue;
-    private int isPause;
+    private int isPause = 1;
 
     void Start()
     {
         soundvalue = 0;
         SoundButtonFunc();        
         //Sound = 사운드 데이터
-        isPause = 0;
+        PauseButtonFunc();
+        //isPause = 0;
     }
     public void QuitButtonYes(){
         PlayerPrefs.SetInt("GameScene", 0);

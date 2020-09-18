@@ -7,7 +7,8 @@ public class Boss : Enemy
 {
     public static Boss instance;
     public AnimatorOverrideController[] AnimController;
-    public int Hp;
+    //public int Hp;
+    private int Hp;
     public GameObject HpBar;
 
     Animator BossAnim;
@@ -37,9 +38,8 @@ public class Boss : Enemy
     }
     
     public override void Move(){
-        if (this.transform.position.x > -3.3f){
-            this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);            
-        }
+        this.transform.Translate(speed*GameManager.instance.Speed*Time.timeScale, 0, 0);            
+        
     }
     public override void Attacked()
     {
@@ -55,6 +55,10 @@ public class Boss : Enemy
     }
     public void OffObj(){
         gameObject.SetActive(false);
+    }
+
+    public int GetBossHp(){
+        return Hp;
     }
 
 }

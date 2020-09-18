@@ -73,8 +73,7 @@ public class AttackManagerScript : MonoBehaviour
         }
     }
     public void ResetData(){
-        SumOfColor = 0;        
-        
+        SumOfColor = 0;    
         PushedButtonNum = 0;//0606
         
     }
@@ -87,23 +86,30 @@ public class AttackManagerScript : MonoBehaviour
 
     public void StarButtonFunc(){
         //BossAttackedObj.GetComponent<Animator>().SetTrigger("Attacked");
-        BossAttackedObj.SetActive(true);
-        BossAttackedObj.GetComponent<Animator>().SetBool("IsAttacked", true);
-        Boss.instance.Attacked();
+        if(!GameManager.instance.isGameOver){
+            BossAttackedObj.SetActive(true);
+            BossAttackedObj.GetComponent<Animator>().SetBool("IsAttacked", true);
+            Boss.instance.Attacked();
+        }        
     }
 
     public void ActiveStarButton(){
-        if(starNum<5)
+        if(starNum < 4 )//4번째까지 보여주고 5번째는 보스 나올때 보여줌
             StarButton[starNum].gameObject.SetActive(true);
         starNum++;
+    }
+    public void ActiveNumStar5(){
+        //이렇게 한 이유, 별에 가운데 컬러 버튼에 생기기 때문에 게임 플레이에 방해가 있기 때문
+        if(starNum > 4)
+            StarButton[4].gameObject.SetActive(true);
     }
 
     public void DecreaseStarNum(bool isBossDead){
         starNum--;
-        if(starNum<=0 && isBossDead == false){
+        /*if(starNum<=0 && isBossDead == false){
             GameManager.instance.GameOver();
-            Player.instance.GetComponent<Animator>().SetTrigger("Dead");
-        }
+            Player.instance.GetComponent<Animator>().SetTrigger("IsDead");
+        }*/
     }
 
     

@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     public virtual void Move()
     {
         if (this.transform.position.x > -3.3f)
-            this.transform.Translate(speed*GameManager.Speed*Time.timeScale, 0, 0);
+            this.transform.Translate(speed*GameManager.instance.Speed*Time.timeScale, 0, 0);
         else{
             ResetObj();
         }
@@ -42,10 +42,11 @@ public class Enemy : MonoBehaviour
     public void ResetObj(){        
         Hp=1;
         gameObject.SetActive(false);
-        transform.position = firstPos;
-        //0616
-        EnemyManagerScript.instance.SpawnEnemy();//스폰은 애니메이션 끝나고
-        gameObject.SetActive(true);       
+        if(!GameManager.instance.isGameOver){
+            transform.position = firstPos;
+            EnemyManagerScript.instance.SpawnEnemy();//스폰은 애니메이션 끝나고
+            gameObject.SetActive(true);     
+        }         
 
     }
 
@@ -55,11 +56,15 @@ public class Enemy : MonoBehaviour
     public void SetColorNum(int num){
         ColorNum = num;
     }
-    /*void OnTriggerEnter2D(Collider2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
         if(coll.CompareTag("Player")){
-            Debug.Log("플레이어랑 부딪힘");
+            if(Hp > 0){
+                coll.GetComponent<Player>().Attacked();
+                GameManager.instance.DecreaseMonsterNum();
+                Debug.Log("플레이어랑 부딪힘");
+            }               
         }
     }
-    */
+    
 }
