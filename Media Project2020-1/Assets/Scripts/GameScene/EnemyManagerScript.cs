@@ -14,7 +14,7 @@ public class EnemyManagerScript : MonoBehaviour
     int[] SpawnEnemyArr;
     Dictionary<int, int[]> DicSpawnInfo;
     Dictionary<int, List<AnimatorOverrideController>> DicAnimController;
-
+    int enemyCount = 0;
     void Awake()
     {        
         instance = this;
@@ -34,7 +34,7 @@ public class EnemyManagerScript : MonoBehaviour
         EnemyAnim = EnemyObj.GetComponent<Animator>();
         //0616
         SpawnEnemy();
-        //EnemyAnim.runtimeAnimatorController = AnimController[0];//Enemy애니메이션 세팅
+        swapEnemyArray(); // 0923
     }
     public void SpawnEnemy(){
         int EnemyNum = GetRandomNum();//Stage에서 등장하는 컬러num
@@ -50,10 +50,26 @@ public class EnemyManagerScript : MonoBehaviour
             DicEnemy[colorArray[i]]= AnimController[i];
         }
     }
-    
+    void swapEnemyArray(){
+        int temp;
+        for(int i=0; i<SpawnEnemyArr.Length-i; i++){
+            int randnum = Random.Range(i,SpawnEnemyArr.Length-1);
+            temp = SpawnEnemyArr[i];
+            SpawnEnemyArr[i]= SpawnEnemyArr[randnum];
+            SpawnEnemyArr[randnum] = temp;
+        }
+    }
     int GetRandomNum(){
-        int num = Random.Range(0,SpawnEnemyArr.Length);//여기가 문제1
-        return SpawnEnemyArr[num];
+        if(enemyCount < SpawnEnemyArr.Length-1){
+            enemyCount++;            
+        } 
+        else{
+            swapEnemyArray();
+            enemyCount = 0;
+        }
+        //0923
+        //int num = Random.Range(0,SpawnEnemyArr.Length);//여기가 문제1
+        return SpawnEnemyArr[enemyCount];
     }
 
 }

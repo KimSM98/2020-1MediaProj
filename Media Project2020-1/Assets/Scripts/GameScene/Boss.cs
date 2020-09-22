@@ -28,6 +28,7 @@ public class Boss : Enemy
         BossAnim = GetComponent<Animator>();
 
         SetAnim();
+        gameObject.SetActive(false);
         /*int ranNum = Random.Range(0,AnimController.Length);
         BossAnim.runtimeAnimatorController = AnimController[ranNum];
         */

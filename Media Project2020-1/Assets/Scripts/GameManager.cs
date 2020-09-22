@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         isMonsterMove = true;
         isBossMove = false;
-        Boss.SetActive(false);
+        //Boss.SetActive(false);
         killedMonsterNum=0;
         Text_KilledMonsterNum.text = "" + killedMonsterNum;
         multiple5 = 5; //0619
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
         int minusScore = Boss.GetComponent<Boss>().GetBossHp();
         if(stageNum == 0) minusScore++;
         //스코어 계산
-        for(int i=0; i<minusScore; i++){
+        for(int i=0; i < minusScore; i++){
             score--;
             if(score == 0) break;
         }
